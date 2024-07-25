@@ -17,3 +17,4 @@ function PostCard({
         </Link>
     )
 }
+export default PostCard

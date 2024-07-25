@@ -1,22 +1,22 @@
 import Confi from '../confi/conf.js'
 import {Client , Databases , Storage , ID , Query} from 'appwrite'
-class Service {
+export class Service {
    client = new Client()
    databases; 
    bucket;
    constructor(){
     this.client
     .setEndpoint(Confi.url)
-    .setProject(Confi.project_id)
+    .setProject(Confi.project_id) ;
     this.databases = new Databases(this.client)
     this.bucket  = new Storage(this.client)
    }
-   async createPost({title, content, featuredImage, status, userId}){
+   async createPost({slug , title, content, featuredImage, status, userId}){
     try {
         return await this.databases.createDocument(
             Confi.database_id,
             Confi.collection_id,
-            ID.unique(),
+            slug , 
             {
                 title,
                 content,
@@ -29,12 +29,12 @@ class Service {
         console.log("Appwrite serive :: createPost :: error", error);
     }
 }
-async updatePost(id , {title, content, featuredImage, status}){
+async updatePost(slug, {title, content, featuredImage, status}){
     try {
         return await this.databases.updateDocument(
             Confi.database_id,
             Confi.collection_id,
-            id,
+            slug,
             {
                 title,
                 content,
@@ -47,16 +47,29 @@ async updatePost(id , {title, content, featuredImage, status}){
         console.log("Appwrite serive :: updatePost :: error", error);
     }
 }
-async deletePost(id){
+async deletePost(slug){
     try {
         await this.databases.deleteDocument(
             Confi.database_id,
             Confi.collection_id,
-            id
+            slug
         )
         return true
     } catch (error) {
         console.log("Appwrite serive :: deletePost :: error", error);
+        return false
+    }
+}
+async getPost(slug){
+    try {
+        return await this.databases.getDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteCollectionId,
+            slug
+        
+        )
+    } catch (error) {
+        console.log("Appwrite serive :: getPost :: error", error);
         return false
     }
 }
@@ -99,8 +112,8 @@ async deleteFile(fileId){
         return false
     }
 }
-getFilePreview(fileId){
-    return this.bucket.getFilePreview(
+async getFilePreview(fileId){
+    return await this.bucket.getFilePreview(
         Confi.bucket_id,
         fileId
     )

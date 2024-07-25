@@ -8,27 +8,27 @@ function Header(){
     const navigate = useNavigate()
     const navItems = [
         {name : 'Home',
-        path : '/',
+        path : ' ',
         active : true 
         },
         {
             name : 'Login',
-            path : 'login',
+            path : '/login',
             active : !authStatus
         },
         {
             name : 'Signup',
-            path : 'signup',
+            path : '/signup',
             active : !authStatus
         },
         {
             name: "All Posts",
-            path : "all-posts",
+            path : "/all-posts",
             active: authStatus,
         },
         {
             name: "Add Post",
-            path : "add-post",
+            path : "/add-post",
             active: authStatus,
         },
     ]

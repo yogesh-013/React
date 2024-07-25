@@ -10,14 +10,17 @@ import Footer from './components/footer/footer.jsx'
 function App() {
   const [loading , setLoading] = useState(true)
   const  dispatch = useDispatch()
-  authService.getCurrentUser()
-  .then((userData)=>{
-      if(userData){
-         dispatch(login(userData))
-      }else{
-        dispatch(logout())
-      }
-  }).finally(()=>setLoading(false))
+  useEffect(()=>{
+    authService.getCurrentUser()
+    .then((userData)=>{
+        if(userData){
+           dispatch(login(userData))
+        }else{
+          dispatch(logout())
+        }
+    }).finally(()=>setLoading(false))
+  },[])
+  
   
   return !loading ? (
     <>
@@ -31,7 +34,7 @@ function App() {
     
   ) : (
     <>
-    <h1>Loading.....</h1>
+    <h1>Load</h1>
     </>
   )
 }

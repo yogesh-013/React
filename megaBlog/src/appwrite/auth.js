@@ -1,11 +1,11 @@
-import {Client , Account , ID } from "appwrite"
+import {Client , Account , ID } from 'appwrite'
 import Confi from '../confi/conf.js'
-class AuthService{
-    client = new Client()
-    account 
+export class AuthService{
+    client = new Client();
+    account ;
     constructor(){
-        this.client.
-        setEndpoint(Confi.url) 
+        this.client
+        .setEndpoint(Confi.url) 
             .setProject(Confi.project_id);  
             this.account = new Account(this.client); 
     }
@@ -22,20 +22,22 @@ class AuthService{
             console.log(error);
         }
     }
-    async login(username , password){
+    async login({username , password}){
         try{
-      return await this.account.createEmailPasswordSession(username , password)}
+      return await this.account.createEmailSession(username , password)}
       catch(error){
         console.log("error : " , error )
       }
     }
-    async getCurrentUser(){
-        try{
-            return await this.account.get()
-        }catch(error){
-            console.log(error)
+    
+    async getCurrentUser() {
+        try {
+            return await this.account.get();
+        } catch (error) {
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
-        return null 
+
+        return null;
     }
     async logout(){
         try{
