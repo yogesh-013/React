@@ -15,15 +15,15 @@ import{ Provider }from 'react-redux'
 import Protected from './postForm/authLayout.jsx'
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
         {
-            path: "/",
+            path: "",
             element: <Home />,
         },
         {
-            path: "/login",
+            path: "login",
             element: (
                 <Protected authentication={false}>
                     <Login />
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             ),
         },
         {
-            path: "/signup",
+            path: "signup",
             element: (
                 <Protected authentication={false}>
                     <Signup />
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             ),
         },
         {
-            path: "/all-posts",
+            path: "all-posts",
             element: (
                 <Protected authentication>
                     {" "}
@@ -48,30 +48,31 @@ const router = createBrowserRouter([
             ),
         },
         {
-            path: "/add-post",
-            element: (
-                <Protected authentication>
-                    {" "}
-                    <AddPost />
-                </Protected>
-            ),
-        },
-        {
-            path: "/edit-post/:slug",
-            element: (
-                <Protected authentication>
-                    {" "}
-                    <EditPost />
-                </Protected>
-            ),
-        },
-        {
-            path: "/post/:slug",
-            element: <Post />,
-        },
-    ],
+          path: "add-post",
+          element: (
+              <Protected authentication>
+                  {" "}
+                  <AddPost />
+              </Protected>
+          ),
+      },
+      {
+          path: "edit-post/:slug",
+          element: (
+              <Protected authentication>
+                  {" "}
+                  <EditPost />
+              </Protected>
+          ),
+      },
+      {
+          path: "post/:slug",
+          element: <Post />,
+      },
+    ],
 },
 ])
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

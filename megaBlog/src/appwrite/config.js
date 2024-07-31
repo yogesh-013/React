@@ -6,16 +6,16 @@ export class Service {
    bucket;
    constructor(){
     this.client
-    .setEndpoint(Confi.url)
-    .setProject(Confi.project_id) ;
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('66a1fac80037a784b11e') ;
     this.databases = new Databases(this.client)
     this.bucket  = new Storage(this.client)
    }
    async createPost({slug , title, content, featuredImage, status, userId}){
     try {
         return await this.databases.createDocument(
-            Confi.database_id,
-            Confi.collection_id,
+            '66a245360014bdf00344',
+            '66a2458c000673a93c17',
             slug , 
             {
                 title,
@@ -32,8 +32,8 @@ export class Service {
 async updatePost(slug, {title, content, featuredImage, status}){
     try {
         return await this.databases.updateDocument(
-            Confi.database_id,
-            Confi.collection_id,
+            '66a245360014bdf00344',
+            '66a2458c000673a93c17',
             slug,
             {
                 title,
@@ -50,8 +50,8 @@ async updatePost(slug, {title, content, featuredImage, status}){
 async deletePost(slug){
     try {
         await this.databases.deleteDocument(
-            Confi.database_id,
-            Confi.collection_id,
+            '66a245360014bdf00344',
+            '66a2458c000673a93c17',
             slug
         )
         return true
@@ -63,8 +63,8 @@ async deletePost(slug){
 async getPost(slug){
     try {
         return await this.databases.getDocument(
-            conf.appwriteDatabaseId,
-            conf.appwriteCollectionId,
+            '66a245360014bdf00344',
+            '66a2458c000673a93c17',
             slug
         
         )
@@ -76,8 +76,8 @@ async getPost(slug){
 async getPosts(queries = [Query.equal("status", "active")]){
     try {
         return await this.databases.listDocuments(
-            Confi.database_id,
-            Confi.collection_id,
+            '66a245360014bdf00344',
+            '66a2458c000673a93c17',
             queries,
             
 
@@ -91,7 +91,7 @@ async getPosts(queries = [Query.equal("status", "active")]){
 async uploadFile(file){
     try {
         return await this.bucket.createFile(
-            Confi.bucket_id,
+            '66a246e8002fd31c5be0',
             ID.unique(),
             file
         )
@@ -103,7 +103,7 @@ async uploadFile(file){
 async deleteFile(fileId){
     try {
         await this.bucket.deleteFile(
-            Confi.bucket_id,
+            '66a246e8002fd31c5be0',
             fileId
         )
         return true
@@ -114,7 +114,7 @@ async deleteFile(fileId){
 }
 async getFilePreview(fileId){
     return await this.bucket.getFilePreview(
-        Confi.bucket_id,
+        '66a246e8002fd31c5be0',
         fileId
     )
 }

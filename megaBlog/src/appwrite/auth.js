@@ -5,8 +5,8 @@ export class AuthService{
     account ;
     constructor(){
         this.client
-        .setEndpoint(Confi.url) 
-            .setProject(Confi.project_id);  
+        .setEndpoint('https://cloud.appwrite.io/v1') 
+            .setProject('66a1fac80037a784b11e');  
             this.account = new Account(this.client); 
     }
     async create({username , password , name}){
@@ -32,7 +32,10 @@ export class AuthService{
     
     async getCurrentUser() {
         try {
-            return await this.account.get();
+            const a =  await this.account.get();
+            if(a){
+                return a ; 
+            }
         } catch (error) {
             console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
